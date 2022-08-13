@@ -54,10 +54,18 @@ group by p2.specialty_description
 order by total_claim DESC;
 
 
+--2b. Which specialty had the most total number of claims for opioids?
+--Nurse Practitioner has the most opiods with 900845 claims.
 
-
-
-
+Select sum(total_claim_count) as total_claim, p2.specialty_description
+from prescription as p1
+Left Join prescriber as p2
+on p1.npi = p2.npi
+Left Join drug as d
+on p1.drug_name = d.drug_name
+where d.opioid_drug_flag = 'Y'
+group by p2.specialty_description
+order by total_claim DESC;
 
 
 
