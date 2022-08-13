@@ -93,6 +93,15 @@ order by per_day DESC
 --4a. a. For each drug in the drug table, return the drug name and then a column named 'drug_type' which says 'opioid' for drugs which have opioid_drug_flag = 'Y', says 'antibiotic' for those drugs which have antibiotic_drug_flag = 'Y', and says 'neither' for all other drugs.
 
 
+Select d.drug_name,
+CASE WHEN opioid_drug_flag = 'Y' Then 'opioid'
+when antibiotic_drug_flag = 'Y' Then 'antibiotic'
+Else 'neither' END as drug_type
+from drug as d
+Left Join prescription as p
+on d.drug_name = p.drug_name
+group by d.drug_name, drug_type
+
 
 
 
