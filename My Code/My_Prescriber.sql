@@ -43,15 +43,15 @@ Order by total_claim_count DESC
 
 
 --2a Which specialty had the most total number of claims (totaled over all drugs)?
+-- There 9752347 total claims by Family Practice
 
-Select drug_name as Drug_Name, total_claim_count as total_claim, p2.specialty_description
+
+Select sum(total_claim_count) as total_claim, p2.specialty_description
 from prescription as p1
 Left Join prescriber as p2
 on p1.npi = p2.npi
-group by p2.specialty_description, Drug_name, total_claim_count
-order by total_claim_count DESC;
-
-
+group by p2.specialty_description
+order by total_claim DESC;
 
 
 
